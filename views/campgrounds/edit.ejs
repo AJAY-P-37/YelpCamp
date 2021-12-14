@@ -1,0 +1,46 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="row">
+        <h1 class="text-center mb-3">Edit Campground</h1>
+        <div class="col-6 offset-3">
+            <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
+
+                <div class="mb-3"><label class="form-label" for="title">Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]"
+                        value="<%= camp.title %>" required>
+                </div>
+
+                <div class=" mb-3"><label class="form-label" for="location">Location</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]"
+                        value="<%= camp.location %>" required>
+                </div>
+
+                <div class="mb-3"><label class="form-label" for="image">Image URL</label>
+                    <input class="form-control" type="url" id="image" name="campground[image]" value="<%= camp.image %>"
+                        required>
+                    <div class="invalid-feedback">
+                        Please enter a valid URL.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="price">Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="text" class="form-control" placeholder="0" aria-label="price" id="price"
+                            aria-describedby="price" name="campground[price]" value="<%= camp.price %>" required>
+                    </div>
+                </div>
+
+                <div class="mb-3"><label class="form-label" for="description">Description</label>
+                    <textarea class="form-control" type="text" id="description" name="campground[description]"
+                        required><%= camp.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-info" type="submit">Update</button>
+                </div>
+            </form>
+            <footer><a href="/campgrounds" class="link-primary">back</a></footer>
+
+        </div>
+    </div>
