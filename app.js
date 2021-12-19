@@ -3,11 +3,12 @@ const path = require('path')
 const mongoose = require('mongoose')
 const ejsMate = require('ejs-mate')
 const Campground = require('./models/campground');
+const Review = require('./models/review')
 const methodOverride = require('method-override')
 const { urlencoded } = require('express');
 const ExpressError = require('./utils/ExpressError')
 const catchAsync = require('./utils/catchAsync')
-const { campgroundSchema } = require('./schema')
+const { campgroundSchema, reviewSchema } = require('./schema')
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp');
 
@@ -32,6 +33,17 @@ app.use(methodOverride('_method'))
 
 const validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body)
+    console.log(error)
+    if (error) {
+        const message = error.details.map(er => er.message).join(',')
+        throw new ExpressError(message, 400)
+    } else {
+        next()
+    }
+}
+
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body)
     console.log(error)
     if (error) {
         const message = error.details.map(er => er.message).join(',')
@@ -79,6 +91,16 @@ app.put('/campgrounds/:id', validateCampground, catchAsync(async (req, res) => {
 app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
     const camp = await Campground.findByIdAndDelete(req.params.id)
     res.redirect('/campgrounds')
+}))
+
+app.post('/campgrounds/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const campground = await Campground.findById(req.params.id)
+    const review = new Review(req.body.review)
+    campground.reviews.push(review)
+    await review.save()
+    await campground.save()
+
+    res.redirect(`/campgrounds/${campground._id}`)
 }))
 
 app.all('*', (req, res, next) => {
