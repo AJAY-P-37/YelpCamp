@@ -3,7 +3,28 @@
     <div class="row">
         <div class="col-6">
             <div class="card m-2">
-                <img src="<%= camp.image %>" alt="" class="card-img-top">
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% camp.images.forEach((img, index)=> {%>
+                            <div class="carousel-item <%= index===0?'active':'' %>">
+                                <img src="<%= img.url %>" alt="<%= img.filename %>" class="card-img-top d-block w-100">
+                            </div>
+                            <% }); %>
+                    </div>
+                    <% if (camp.images.length>1) { %>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <% } %>
+                </div>
+
                 <div class="card-body">
                     <h5 class="card-title">
                         <%= camp.title %>
@@ -20,7 +41,7 @@
                         <%= camp.author.username %>
                     </li>
                     <li class="list-group-item">$
-                        <%= camp.price %>/night
+                        <%= camp.price %> / night
                     </li>
                 </ul>
                 <% if (currentUser && camp.author.equals(currentUser._id)) { %>
@@ -38,6 +59,8 @@
             </div>
         </div>
         <div class="col-6">
+
+            <div id='map' style='height: 300px;' class="my-2"></div>
             <% if (currentUser) { %>
 
 
@@ -48,7 +71,6 @@
                         <label for="rating" class="form-label">Rating</label>
 
                         <fieldset class="starability-growRotate">
-                            <legend>First rating:</legend>
                             <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0"
                                 checked aria-label="No rating." />
                             <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -95,3 +117,9 @@
                         <% } %>
         </div>
     </div>
+    <script>
+        const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+
+        const campMap = '<%- JSON.stringify(camp) %>'
+    </script>
+    <script src="/javascripts/showMapBox.js"></script>
