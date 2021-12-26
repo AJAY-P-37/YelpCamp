@@ -3,8 +3,8 @@ const campgrounds = { features: JSON.parse(campMaps) }
 const map = new mapboxgl.Map({
     container: 'cluster-map',
     style: 'mapbox://styles/mapbox/light-v10',
-    center: [-103.5917, 40.6699],
-    zoom: 3
+    center: campgrounds.features[0].geometry.coordinates,
+    zoom: 5
 });
 
 map.addControl(new mapboxgl.NavigationControl());

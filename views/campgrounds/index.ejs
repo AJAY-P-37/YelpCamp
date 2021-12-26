@@ -30,10 +30,17 @@
                                         <%= campground.location %>
                                     </small></p>
                                 <p class="card-text"><small class="text-muted">Uploaded By
-                                        <%= campground.author.username %>
-                                    </small></p>
+                                        <strong>
+                                            <%= campground.author.username %>
+                                        </strong>
+                                    </small>
+                                </p>
+                                <p class="card-text">$
+                                    <%= campground.price %>
+                                </p>
 
-                                <a href="/campgrounds/<%= campground._id %> " class="btn btn-primary">View</a>
+                                <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary"
+                                    role="button">View</a>
                             </div>
                         </div>
                     </div>

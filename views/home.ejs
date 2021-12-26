@@ -14,19 +14,28 @@
 
 <body class="d-flex text-center text-white">
     <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
-        <header class="">
-            <div class='d-flex flex-row justify-content-between'>
+        <header>
+            <div class='d-flex flex-row justify-content-between navbar navbar-expand-lg navbar-dark'>
                 <h3 class="mb-0">YelpCamp</h3>
-                <nav class="nav nav-masthead">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
-                    <% if(!currentUser) { %>
-                        <a class="nav-link" href="/login">Login</a>
-                        <a class="nav-link" href="/register">Register</a>
-                        <% } else { %>
-                            <a class="nav-link" href="/logout">Logout</a>
-                            <% } %>
-                </nav>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                    <nav class="nav navbar-nav d-flex flex-row justify-content-center mt-2">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                        <% if(!currentUser) { %>
+                            <a class="nav-link" href="/login">Login</a>
+                            <a class="nav-link" href="/register">Register</a>
+                            <% } else { %>
+                                <a class="nav-link" href="/logout">Logout</a>
+                                <% } %>
+                    </nav>
+                </div>
             </div>
         </header>
 
@@ -35,7 +44,7 @@
                 <h1>Yelp Camp</h1>
                 <p class="lead">Welcome to Yelp Camp! <br> Take a look at our campgrounds <br> Add new exciting places
                     that you have been <br> Plan your next vacation</p>
-                <a href="/campgrounds" class="btn btn-sm btn-secondary font-weight-bold border-white bg-white">View
+                <a href="/campgrounds" class="btn btn-sm btn-outline-light">View
                     Campgrounds</a>
             </div>
         </main>
