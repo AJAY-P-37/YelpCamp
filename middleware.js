@@ -15,7 +15,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 
 module.exports.validateCampground = (req, res, next) => {
     const { error } = campgroundSchema.validate(req.body)
-    console.log(error)
     if (error) {
         const message = error.details.map(er => er.message).join(',')
         throw new ExpressError(message, 400)
@@ -46,7 +45,6 @@ module.exports.isReviewAuthor = async (req, res, next) => {
 
 module.exports.validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body)
-    console.log(error)
     if (error) {
         const message = error.details.map(er => er.message).join(',')
         throw new ExpressError(message, 400)
