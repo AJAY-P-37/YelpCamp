@@ -6,10 +6,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YELP CAMP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/homePage.css">
 </head>
 
-<body>
-    <h1>Hi</h1>
+<body class="d-flex text-center text-white">
+    <div class="cover-container d-flex w-100 p-3 mx-auto flex-column">
+        <header class="">
+            <div class='d-flex flex-row justify-content-between'>
+                <h3 class="mb-0">YelpCamp</h3>
+                <nav class="nav nav-masthead">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="/campgrounds">Campgrounds</a>
+                    <% if(!currentUser) { %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/logout">Logout</a>
+                            <% } %>
+                </nav>
+            </div>
+        </header>
+
+        <main class="p-3 m-auto">
+            <div>
+                <h1>Yelp Camp</h1>
+                <p class="lead">Welcome to Yelp Camp! <br> Take a look at our campgrounds <br> Add new exciting places
+                    that you have been <br> Plan your next vacation</p>
+                <a href="/campgrounds" class="btn btn-sm btn-secondary font-weight-bold border-white bg-white">View
+                    Campgrounds</a>
+            </div>
+        </main>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

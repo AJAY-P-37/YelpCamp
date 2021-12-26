@@ -1,56 +1,69 @@
 <% layout('layouts/boilerplate') %>
 
-    <div class="row">
-        <h1 class="text-center mb-3">Edit Campground</h1>
-        <div class="">
-            <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="POST" novalidate class="needs-validation"
-                enctype="multipart/form-data">
+    <div class="row my-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow">
+                <h5 class="card-header">Edit Campground</h5>
+                <div class="card-body">
+                    <form action="/campgrounds/<%= camp._id %>?_method=PUT" method="POST" novalidate
+                        class="needs-validation" enctype="multipart/form-data">
 
-                <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
-                    <input class="form-control" type="text" id="title" name="campground[title]"
-                        value="<%= camp.title %>" required>
-                </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control" type="text" id="title" name="campground[title]"
+                                value="<%= camp.title %>" required>
+                        </div>
 
-                <div class=" mb-3">
-                    <label class="form-label" for="location">Location</label>
-                    <input class="form-control" type="text" id="location" name="campground[location]"
-                        value="<%= camp.location %>" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="price">Price</label>
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input type="text" class="form-control" placeholder="0" aria-label="price" id="price"
-                            aria-describedby="price" name="campground[price]" value="<%= camp.price %>" required>
-                    </div>
-                </div>
-
-                <div class="mb-3"><label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" type="text" id="description" name="campground[description]"
-                        required><%= camp.description %></textarea>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="image">Add Images</label>
-                    <input type="file" name="campground[image]" id="image" class="form-control" multiple>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Delete Images</label>
-                    <div class="d-flex flex-wrap">
-                        <% camp.images.forEach((img, index)=> { %>
-                            <div class="form-check me-3">
-                                <img src="<%= img.thumbnail %>" alt="" srcset="" class="image-thumbnail">
-                                <input class="form-check-input" type="checkbox" value="<%= img.filename %>"
-                                    id="flexCheckDefault<%= index %>" name="deleteImages[]">
+                        <div class=" mb-3">
+                            <label class="form-label" for="location">Location</label>
+                            <input class="form-control" type="text" id="location" name="campground[location]"
+                                value="<%= camp.location %>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="price">Price</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" placeholder="0" aria-label="price" id="price"
+                                    aria-describedby="price" name="campground[price]" value="<%= camp.price %>"
+                                    required>
                             </div>
-                            <% }) %>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-info" type="submit">Update</button>
-                </div>
-            </form>
-            <footer><a href="/campgrounds/<%= camp._id %> " class="btn btn-sm btn-primary">back</a></footer>
+                        </div>
 
+                        <div class="mb-3"><label class="form-label" for="description">Description</label>
+                            <textarea class="form-control" type="text" id="description" name="campground[description]"
+                                required><%= camp.description %></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="image">Add Images</label>
+                            <input type="file" name="campground[image]" id="image" class="form-control" multiple>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Delete Images</label>
+                            <div class="d-flex flex-wrap">
+                                <% camp.images.forEach((img, index)=> { %>
+                                    <div class="form-check me-3">
+                                        <img src="<%= img.thumbnail %>" alt="" srcset="" class="image-thumbnail"
+                                            id="checkbox<%= index %>" onclick="check('<%=index%>')">
+                                        <input class="form-check-input" type="checkbox" value="<%= img.filename %>"
+                                            id="flexCheckDefault<%= index %>" name="deleteImages[]">
+                                    </div>
+                                    <% }) %>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-info" type="submit">Update</button>
+                        </div>
+                    </form>
+                    <footer><a href="/campgrounds/<%= camp._id %> " class="btn btn-sm btn-primary">back</a></footer>
+
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        function check(index) {
+            const checkbox = document.getElementById('flexCheckDefault' + index)
+            checkbox.click()
+        }
+    </script>

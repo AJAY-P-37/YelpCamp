@@ -13,3 +13,6 @@ new mapboxgl.Marker()
         .setHTML(`<h5 class='card-title'>${campground.title}</h5>
         <p class='text-muted'>${campground.location}</p>`))
     .addTo(map)
+
+
+map.addControl(new mapboxgl.NavigationControl());
